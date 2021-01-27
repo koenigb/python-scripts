@@ -1,0 +1,31 @@
+import pandas as pd
+def table_join(leftdf, rightdf, join_type, left_array, right_array):
+    df3 = pd.merge(leftdf, rightdf, how= join_type, left_on = left_array, right_on = right_array)
+    return df3
+    # This function above merges two data files using these parameters
+    # leftdf = the first data file you wish to merge
+    # rightdf = the first data file you wish to merge
+    # join_type = the type of merge you wish to do ex: left, right, outer, inner, left-anti, right-anti
+    # df3 = the result of the join with variables df1 and df2 using arrays
+    # left_on = left_array - means you can create an array using column names you want to compare from the left file ex: ['User']
+    # right_on = right_array - means you can create an array using column names you want to compare from the right file ex ['customers']
+    # for left_on and right_on you can add as many column names as you wish to compare. The column names also go in order of which columns you wish to compare. 
+
+## USER ENTRY 
+# for filenames put full path to the data files you want to merge
+filename1 ="/Users/Stephanie1/Downloads/test1.xlsx"
+filename2 ="/Users/Stephanie1/Downloads/test2.xlsx"
+
+## This reads the filename1 and filename2 and puts the output in a variable called file1 and file2 
+
+file1 = pd.read_excel(filename1)
+file2 = pd.read_excel(filename2)
+
+## This uses the inital function table_join with leftdf = file1, rightdf =file2, 'outer' is the join_type and [] are the left and right arrays 
+merged_file = table_join(file1, file2, 'outer', ['User'],['customer'])
+
+##This allow you to convert the merged excel file into csv format. Merged.csv is the new name of the file and index =False means do not make a column with the index values
+merged_file.to_csv("Merged.csv", index = False)
+
+
+print(merged_file)
